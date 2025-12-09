@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Realiza tu reservación - ReservApp">
+    <title>Hacer Reservación - ReservApp</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/booking.css">
+</head>
+
+<body>
+    <div class="booking-container">
+        <div class="booking-card card">
+            <!-- Header -->
+            <div class="booking-header">
+                <div class="booking-logo">🍽️ ReservApp</div>
+                <h1 class="booking-title">Reserva tu Mesa</h1>
+                <p class="booking-subtitle">Completa los siguientes pasos para confirmar tu reservación</p>
+            </div>
+
+            <!-- Steps Indicator -->
+            <div class="booking-steps">
+                <div class="booking-step" data-step="1">
+                    <div class="booking-step-circle">1</div>
+                    <span class="booking-step-label">Fecha y Hora</span>
+                </div>
+                <div class="booking-step" data-step="2">
+                    <div class="booking-step-circle">2</div>
+                    <span class="booking-step-label">Tus Datos</span>
+                </div>
+                <div class="booking-step" data-step="3">
+                    <div class="booking-step-circle">3</div>
+                    <span class="booking-step-label">Confirmación</span>
+                </div>
+            </div>
+
+            <!-- Formulario -->
+            <form id="bookingForm">
+
+                <!-- PASO 1: Fecha y Hora -->
+                <div id="section-datetime" class="booking-section active">
+                    <div class="date-time-grid">
+                        <div class="form-group">
+                            <label for="date" class="form-label required">Fecha</label>
+                            <input type="date" id="date" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label required">Número de Personas</label>
+                            <input type="hidden" id="guests" value="2">
+                            <div class="guest-counter">
+                                <button type="button" id="btn-decrease" class="guest-counter-btn">−</button>
+                                <span id="guestCount" class="guest-counter-value">2</span>
+                                <button type="button" id="btn-increase" class="guest-counter-btn">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label required">Selecciona tu Horario</label>
+                        <div id="timeSlots" class="time-slots">
+                            <!-- Los slots se generarán dinámicamente -->
+                        </div>
+                    </div>
+
+                    <div class="booking-navigation">
+                        <a href="../public/index.html" class="btn btn-secondary">Cancelar</a>
+                        <button type="button" id="btn-next-1" class="btn btn-primary">
+                            Continuar →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PASO 2: Datos del Cliente -->
+                <div id="section-details" class="booking-section">
+                    <div class="form-group">
+                        <label for="name" class="form-label required">Nombre Completo</label>
+                        <input type="text" id="name" class="form-input" placeholder="Juan Pérez" required>
+                        <span class="form-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label required">Correo Electrónico</label>
+                        <input type="email" id="email" class="form-input" placeholder="juan@example.com" required>
+                        <span class="form-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="form-label required">Teléfono</label>
+                        <input type="tel" id="phone" class="form-input" placeholder="+52 55 1234 5678" required>
+                        <span class="form-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes" class="form-label">Notas Especiales (Opcional)</label>
+                        <textarea id="notes" class="form-textarea"
+                            placeholder="Alergias, preferencias de mesa, ocasión especial..."></textarea>
+                    </div>
+
+                    <div class="booking-navigation">
+                        <button type="button" id="btn-back-2" class="btn btn-secondary">
+                            ← Atrás
+                        </button>
+                        <button type="button" id="btn-next-2" class="btn btn-primary">
+                            Confirmar Reservación
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PASO 3: Confirmación -->
+                <div id="section-confirmation" class="booking-section">
+                    <div class="confirmation-success">
+                        <div class="confirmation-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+
+                        <h2>¡Reservación Confirmada!</h2>
+                        <p>Tu mesa ha sido reservada exitosamente</p>
+
+                        <div class="confirmation-code" id="confirmationCode">
+                            RES-2024-001
+                        </div>
+
+                        <p class="text-center">
+                            Guarda este código de confirmación.<br>
+                            Hemos enviado los detalles a tu correo.
+                        </p>
+
+                        <div class="confirmation-details">
+                            <div class="confirmation-detail-row">
+                                <span class="confirmation-detail-label">Fecha:</span>
+                                <span class="confirmation-detail-value" id="confirm-date">-</span>
+                            </div>
+                            <div class="confirmation-detail-row">
+                                <span class="confirmation-detail-label">Hora:</span>
+                                <span class="confirmation-detail-value" id="confirm-time">-</span>
+                            </div>
+                            <div class="confirmation-detail-row">
+                                <span class="confirmation-detail-label">Personas:</span>
+                                <span class="confirmation-detail-value" id="confirm-guests">-</span>
+                            </div>
+                            <div class="confirmation-detail-row">
+                                <span class="confirmation-detail-label">Nombre:</span>
+                                <span class="confirmation-detail-value" id="confirm-name">-</span>
+                            </div>
+                        </div>
+
+                        <div class="confirmation-actions">
+                            <button type="button" class="btn btn-primary btn-block" onclick="window.print()">
+                                🖨️ Imprimir Confirmación
+                            </button>
+                            <button type="button" id="btn-new-reservation" class="btn btn-outline btn-block">
+                                Hacer Otra Reservación
+                            </button>
+                            <a href="../public/index.html" class="btn btn-secondary btn-block">
+                                Volver al Inicio
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../config/settings.js"></script>
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+    <script src="../assets/js/booking.js"></script>
+</body>
+
+</html>

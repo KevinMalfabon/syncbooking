@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gestión de Reservaciones - ReservApp">
+    <title>Reservaciones - Dashboard ReservApp</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">🍽️ ReservApp</div>
+                <div class="sidebar-restaurant">Cargando...</div>
+            </div>
+
+            <nav>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-nav-item">
+                        <a href="index.html" class="sidebar-nav-link">
+                            <span>📊</span>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="reservations.html" class="sidebar-nav-link active">
+                            <span>📅</span>
+                            <span>Reservaciones</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="#" class="sidebar-nav-link">
+                            <span>🪑</span>
+                            <span>Mesas</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="#" class="sidebar-nav-link">
+                            <span>🕒</span>
+                            <span>Disponibilidad</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="#" class="sidebar-nav-link">
+                            <span>⚙️</span>
+                            <span>Configuración</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="sidebar-user-avatar">AR</div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name">Admin</div>
+                        <div class="sidebar-user-role">Administrador</div>
+                    </div>
+                </div>
+                <button id="logoutBtn" class="btn btn-secondary btn-block btn-sm">
+                    Cerrar Sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <h1 class="dashboard-header-title">Gestión de Reservaciones</h1>
+                <div class="dashboard-header-actions">
+                    <button class="btn btn-primary">
+                        ➕ Nueva Reserva
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Filters Bar -->
+                <div class="filters-bar">
+                    <div class="filters-grid">
+                        <div class="form-group mb-0">
+                            <label for="searchReservations" class="form-label">Buscar</label>
+                            <div class="search-input">
+                                <span class="search-input-icon">🔍</span>
+                                <input type="text" id="searchReservations" class="form-input"
+                                    placeholder="Nombre, email o código...">
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-0">
+                            <label for="filterDate" class="form-label">Fecha</label>
+                            <input type="date" id="filterDate" class="form-input">
+                        </div>
+
+                        <div class="form-group mb-0">
+                            <label class="form-label">Estado</label>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                <button class="btn btn-sm btn-secondary active" data-filter="all">
+                                    Todas
+                                </button>
+                                <button class="btn btn-sm btn-secondary" data-filter="confirmed">
+                                    Confirmadas
+                                </button>
+                                <button class="btn btn-sm btn-secondary" data-filter="pending">
+                                    Pendientes
+                                </button>
+                                <button class="btn btn-sm btn-secondary" data-filter="cancelled">
+                                    Canceladas
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reservations Table -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <h2 class="table-title">
+                            Reservaciones <span id="reservationCount" style="color: var(--color-gray-500);">(0)</span>
+                        </h2>
+                        <div class="table-actions">
+                            <button class="btn btn-secondary btn-sm">
+                                📥 Exportar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table id="reservationsTable" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Cliente</th>
+                                    <th>Email</th>
+                                    <th>Teléfono</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Personas</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="9" class="text-center">
+                                        <div class="loader"></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Pagination (placeholder) -->
+                <div
+                    style="display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-top: 2rem;">
+                    <button class="btn btn-sm btn-secondary" disabled>
+                        ← Anterior
+                    </button>
+                    <span style="padding: 0 1rem; color: var(--color-gray-600);">
+                        Página 1 de 1
+                    </span>
+                    <button class="btn btn-sm btn-secondary" disabled>
+                        Siguiente →
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../config/settings.js"></script>
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+
+    <script>
+        // Actualizar contador de reservaciones cuando cambien
+        function updateReservationCount() {
+            const tbody = document.querySelector('#reservationsTable tbody');
+            const rows = tbody.querySelectorAll('tr:not(:has(.loader))');
+            const counter = document.getElementById('reservationCount');
+            if (counter) {
+                counter.textContent = `(${rows.length})`;
+            }
+        }
+
+        // Observer para detectar cambios en la tabla
+        const observer = new MutationObserver(updateReservationCount);
+        const tableBody = document.querySelector('#reservationsTable tbody');
+        if (tableBody) {
+            observer.observe(tableBody, { childList: true, subtree: true });
+        }
+    </script>
+</body>
+
+</html>

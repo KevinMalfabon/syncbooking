@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dashboard - ReservApp">
+    <title>Dashboard - ReservApp</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">🍽️ ReservApp</div>
+                <div class="sidebar-restaurant">Cargando...</div>
+            </div>
+
+            <nav>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-nav-item">
+                        <a href="index.html" class="sidebar-nav-link active">
+                            <span>📊</span>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="reservations.html" class="sidebar-nav-link">
+                            <span>📅</span>
+                            <span>Reservaciones</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="#" class="sidebar-nav-link">
+                            <span>🪑</span>
+                            <span>Mesas</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="#" class="sidebar-nav-link">
+                            <span>🕒</span>
+                            <span>Disponibilidad</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a href="#" class="sidebar-nav-link">
+                            <span>⚙️</span>
+                            <span>Configuración</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="sidebar-user-avatar">AR</div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name">Admin</div>
+                        <div class="sidebar-user-role">Administrador</div>
+                    </div>
+                </div>
+                <button id="logoutBtn" class="btn btn-secondary btn-block btn-sm">
+                    Cerrar Sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <h1 class="dashboard-header-title">Dashboard</h1>
+                <div class="dashboard-header-actions">
+                    <span style="color: var(--color-gray-600); font-size: 0.875rem;">
+                        Última actualización: <strong id="lastUpdate">Ahora</strong>
+                    </span>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title">Hoy</span>
+                            <div class="stat-card-icon primary">📅</div>
+                        </div>
+                        <div class="stat-card-value" id="stat-today">0</div>
+                        <div class="stat-card-change positive">+0%</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title">Esta Semana</span>
+                            <div class="stat-card-icon success">📈</div>
+                        </div>
+                        <div class="stat-card-value" id="stat-week">0</div>
+                        <div class="stat-card-change positive">+0%</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title">Ingresos del Mes</span>
+                            <div class="stat-card-icon success">💰</div>
+                        </div>
+                        <div class="stat-card-value" id="stat-revenue">$0</div>
+                        <div class="stat-card-change positive">+0%</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title">Ocupación</span>
+                            <div class="stat-card-icon warning">⚡</div>
+                        </div>
+                        <div class="stat-card-value" id="stat-occupancy">0%</div>
+                        <div class="stat-card-change negative">-0%</div>
+                    </div>
+                </div>
+
+                <!-- Recent Reservations -->
+                <div id="recentReservations" class="table-container">
+                    <div class="table-header">
+                        <h2 class="table-title">Reservaciones Recientes</h2>
+                        <div class="table-actions">
+                            <a href="reservations.html" class="btn btn-primary btn-sm">
+                                Ver Todas
+                            </a>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Cliente</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Personas</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="6" class="text-center">
+                                        <div class="loader"></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card" style="margin-top: 2rem;">
+                    <div class="card-header">
+                        <h3 class="card-title">Acciones Rápidas</h3>
+                    </div>
+                    <div class="card-body">
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <button class="btn btn-outline">
+                                ➕ Nueva Reserva Manual
+                            </button>
+                            <button class="btn btn-outline">
+                                📊 Generar Reporte
+                            </button>
+                            <button class="btn btn-outline">
+                                ✉️ Enviar Notificaciones
+                            </button>
+                            <button class="btn btn-outline">
+                                🔒 Bloquear Fecha
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../config/settings.js"></script>
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+
+    <script>
+        // Actualizar timestamp cada minuto
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('lastUpdate').textContent =
+                now.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+        }, 60000);
+    </script>
+</body>
+
+</html>
